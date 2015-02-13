@@ -106,6 +106,7 @@ INSTALLED_APPS = (
     "django_extensions", # needed for clean_pyc (testing)
     "kalite.distributed",
     "kalite.store",
+    "sekizai"
 )
 
 if not BUILT:
@@ -123,6 +124,7 @@ MIDDLEWARE_CLASSES = (
 ) + getattr(local_settings, 'MIDDLEWARE_CLASSES', tuple())
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",  # needed for django admin
+    "sekizai.context_processors.sekizai" #SEKIZAI
 ) + getattr(local_settings, 'TEMPLATE_CONTEXT_PROCESSORS', tuple())
 
 TEMPLATE_DIRS  = tuple()  # will be filled recursively via INSTALLED_APPS

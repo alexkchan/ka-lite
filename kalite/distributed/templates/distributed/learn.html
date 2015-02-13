@@ -1,5 +1,6 @@
 {% extends "distributed/base_teach.html" %}
 {% load my_filters i18n i18n_filters staticfiles %}
+{% load sekizai_tags %}
 
 {% block title %}
     {% trans "Learn" %}
@@ -8,8 +9,10 @@
 {% block learn_active %}active{% endblock learn_active %}
 {% block learn_subnav_active %}learn-active active-tab active-nav{% endblock learn_subnav_active %}
 
+{% block headjs %}
+{{ block.super }}
 
-{% block headcss %}{{ block.super }}
+    {% addtoblock "css" %}
 
     <style type="text/css">
         /* Overridding bootstrap back to defaults to make perseus looking good */
@@ -25,6 +28,7 @@
             background-color: #F7F7F7 !important;
         }
     </style>
+
 
     {% if load_perseus_assets %}
         <!-- START PERSEUS STUFF -->
@@ -48,9 +52,10 @@
 
     <link href="{% static "pdfjs/web/viewer.css" %}" rel="stylesheet" type="text/css">
 
-{% endblock headcss %}
+    {% endaddtoblock %}
 
-{% block headjs %}{{ block.super }}
+    {% addtoblock "js" %}
+
     {% if load_perseus_assets %}
         <!-- START PERSEUS STUFF -->
         <script src="{% static "perseus/lib/es5-shim.js" %}"></script>
@@ -124,7 +129,7 @@
     <script src="{% static 'js/jquery.slimscroll.min.js' %}"></script>
     <script src="{% static 'js/distributed/topics/models.js' %}"></script>
     <script src="{% static 'js/distributed/topics/views.js' %}"></script>
-    <script src="{% static 'js/distributed/topics/router.js' %}"></script>
+    <script src="{% static 'js/distributed/topics/router.js' %}"></script>  
 
     <script type="text/javascript">
         $(function() {
@@ -133,12 +138,11 @@
         });
     </script>
 
-{% endblock headjs %}
+    {% endaddtoblock %}
 
-{% block content %}
-    {{ block.super }}
+
     <div id="sidebar-container">
     </div>
     <div id="content-area">
     </div>
-{% endblock content %}
+{% endblock headjs %}
